@@ -1,16 +1,23 @@
 import 'dart:io';
 
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_widget_test_210301/button.dart';
 import 'package:flutter_app_widget_test_210301/const.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 
 class ThirdPage extends StatefulWidget {
   @override
   _ThirdPageState createState() => _ThirdPageState();
 }
 
-class _ThirdPageState extends State {
+class _ThirdPageState extends State<ThirdPage> {
+  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+
+  Position _currentPosition;
+  String _currentAddress;
   bool _first = true;
   double _sliderValue = 10.0;
   List<bool> _isSelected = List.generate(3, (_) => false);
@@ -21,6 +28,9 @@ class _ThirdPageState extends State {
 
   @override
   Widget build(BuildContext context) {
+    _currentAddress ??= "nincs adat!";
+    ContainerTransitionType _containerTransitionType =
+        ContainerTransitionType.fade;
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text('THIRD SCREEN')),
@@ -28,6 +38,78 @@ class _ThirdPageState extends State {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: OpenContainer(
+                transitionType: _containerTransitionType,
+                transitionDuration: Duration(seconds: 1),
+                openBuilder: (BuildContext context, VoidCallback _) {
+                  return Container(
+                    width: 200,
+                    height: 200,
+                    child: Center(
+                        child: MyButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      buttonColor: Colors.red,
+                      buttonName: "PAFF",
+                    )),
+                  );
+                },
+                closedElevation: 0,
+                closedShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32),
+                    side: BorderSide(color: Colors.white, width: 1)),
+                closedColor: Colors.blue,
+                closedBuilder: (context, _) => Container(
+                  alignment: Alignment.center,
+                  width: 100,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      "Click Me",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(_currentAddress),
+                    AnimatedPhysicalModel(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.fastOutSlowIn,
+                      elevation: _first ? 5.0 : 10.0,
+                      shape: BoxShape.rectangle,
+                      shadowColor: Colors.grey,
+                      color: _first ? Colors.lightGreen : Colors.green[900],
+                      borderRadius: _first
+                          ? const BorderRadius.all(Radius.circular(10))
+                          : const BorderRadius.all(Radius.circular(30)),
+                      child: MyButton(
+                        buttonName: ("Get location"),
+                        onPressed: () {
+                          setState(() {
+                            _first = !_first;
+                          });
+                          _getCurrentLocation();
+                        },
+                        buttonColor: Colors.orange,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Center(
@@ -60,7 +142,6 @@ class _ThirdPageState extends State {
               rows: [
                 DataRow(selected: true, cells: [
                   DataCell(
-
                     Text(
                       '2',
                       style: MyTextStyle2,
@@ -286,6 +367,52 @@ class _ThirdPageState extends State {
                 onPressed: () async => {},
                 buttonName: "URL lancher",
                 buttonColor: Colors.blue),
+            Container(
+              height: 200,
+              child: GridView.count(
+                scrollDirection: Axis.horizontal,
+                crossAxisCount: 2,
+                children: List.generate(50, (index) {
+                  return Container(
+                    child: Card(
+                      color: Colors.amber,
+                    ),
+                  );
+                }),
+              ),
+            ),
+            Center(
+              child: Card(
+                color: Colors.white,
+                child: SwitchListTile(
+                  title: Text(
+                    'Flutter App',
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 20),
+                  ),
+                  value: _first,
+                  activeColor: Colors.red,
+                  inactiveTrackColor: Colors.grey,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _first = value;
+                    });
+                  },
+                  secondary: Image.asset(
+                    "images/load.png",
+                  ),
+                  subtitle: Text(
+                    'loading....',
+                    style: TextStyle(
+                      color: Colors.blueGrey[600],
+                    ),
+                  ),
+                  controlAffinity: ListTileControlAffinity.trailing,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -315,6 +442,36 @@ class _ThirdPageState extends State {
                 child: Text('Close'),
               ),
             ));
+  }
+
+  _getCurrentLocation() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+
+      _getAddressFromLatLng();
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(
+          _currentPosition.latitude, _currentPosition.longitude);
+
+      Placemark place = p[0];
+
+      setState(() {
+        _currentAddress =
+            "${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 }
 

@@ -11,11 +11,11 @@ class FlutterAppWidgetTest extends StatelessWidget {
     num ??= 0;
     num == 8 ? num = 9 : num = 7;
     return MaterialApp(
-      theme: ThemeData.dark().copyWith(
+      theme: ThemeData.light().copyWith(
 
         primaryColor: Colors.blueAccent,
         scaffoldBackgroundColor: Colors.grey[300],
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.white,
           selectedIconTheme: IconThemeData(
             color: Colors.green,

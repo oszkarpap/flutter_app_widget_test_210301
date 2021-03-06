@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter_app_widget_test_210301/screen/sliver.dart';
 import 'package:flutter_app_widget_test_210301/screen/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_widget_test_210301/button.dart';
@@ -137,9 +138,12 @@ class _StartPageState extends State<StartPage> {
               padding: const EdgeInsets.all(16.0),
               child: Wrap(textDirection: TextDirection.rtl, children: <Widget>[
                 MyButton(
-                  buttonName: "Wrap_01",
+                  buttonName: "SliverPage",
                   onPressed: () {
-                    MyNav();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SliverPage()));
                   },
                   buttonColor: Colors.brown,
                 ),

@@ -70,8 +70,11 @@ class _MultiLayoutState extends State<MultiLayout> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Image.network(
-            'https://i.picsum.photos/id/217/200/300.jpg?grayscale&hmac=cltiYxnYprW35wYDYGu8WaxUPaJ3iQYNMQaaU-gMHjU')
+        InteractiveViewer(
+          scaleEnabled: true,
+          child: Image.network(
+              'https://i.picsum.photos/id/217/200/300.jpg?grayscale&hmac=cltiYxnYprW35wYDYGu8WaxUPaJ3iQYNMQaaU-gMHjU'),
+        )
       ],
     );
   }
