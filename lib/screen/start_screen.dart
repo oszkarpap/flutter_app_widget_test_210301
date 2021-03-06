@@ -58,37 +58,33 @@ class _StartPageState extends State<StartPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(columnPaddingEdgeInsets),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 3,
-                    child: MyButton(
-                      buttonName: "TAB",
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => TabsPage()),
-                        );
-                      },
-                      buttonColor: Colors.blue,
-                    ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 3,
+                  child: MyButton(
+                    buttonName: "TAB",
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TabsPage()),
+                      );
+                    },
+                    buttonColor: Colors.blue,
                   ),
-                  Expanded(
-                    flex: 6,
-                    child: MyButton(
-                      buttonName: "Expand 02 + SB",
-                      onPressed: () {
-                        scaffoldKey.currentState
-
-                            .showSnackBar(SnackBar(content: Text("HELLÓ!")));
-                      },
-                      buttonColor: Colors.lightBlueAccent,
-                    ),
+                ),
+                Expanded(
+                  flex: 6,
+                  child: MyButton(
+                    buttonName: "Expand 02 + SB",
+                    onPressed: () {
+                      scaffoldKey.currentState
+                          .showSnackBar(SnackBar(content: Text("HELLÓ!")));
+                    },
+                    buttonColor: Colors.lightBlueAccent,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             Divider(
               height: 100,
@@ -97,54 +93,38 @@ class _StartPageState extends State<StartPage> {
               indent: 20,
               endIndent: 20,
             ),
-            SizedBox(
-              height: mySizedBoxSize,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Wrap(
               children: <Widget>[
                 Transform.rotate(
-                  angle: -(pi / 4),
-                  child: Flexible(
-                    flex: 1,
-                    child: MyButton(
-                      buttonName: "Listview",
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ListViewScreen()));
-                      },
-                      buttonColor: Colors.pinkAccent,
-                    ),
-                  ),
-                ),
-                Spacer(
-                  flex: 1,
-                ),
-                Expanded(
-                  flex: 3,
+                  angle: -(pi / 2),
                   child: MyButton(
-                    buttonName: "Flex + 2.oldal",
+                    buttonName: "Listview",
                     onPressed: () {
-                      MyNav();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ListViewScreen()));
                     },
-                    buttonColor: Colors.orangeAccent,
+                    buttonColor: Colors.pinkAccent,
                   ),
+                ),
+                MyButton(
+                  buttonName: "Flex + 2.oldal",
+                  onPressed: () {
+                    MyNav();
+                  },
+                  buttonColor: Colors.orangeAccent,
                 ),
                 IgnorePointer(
                   ignoring: true,
                   child: Transform.translate(
-                    offset: Offset(-50, -50),
-                    child: Flexible(
-                      flex: 2,
-                      child: MyButton(
-                        buttonName: "Flx+Ignrd",
-                        onPressed: () {
-                          MyNav();
-                        },
-                        buttonColor: Colors.red,
-                      ),
+                    offset: Offset(10, -10),
+                    child: MyButton(
+                      buttonName: "Flx+Ignrd",
+                      onPressed: () {
+                        MyNav();
+                      },
+                      buttonColor: Colors.red,
                     ),
                   ),
                 ),
@@ -206,20 +186,14 @@ class _StartPageState extends State<StartPage> {
                     child: Container(
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.blueAccent)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Positioned(
-                          bottom: 20.0,
-                          child: Center(
-                              child: Hero(
-                                  tag: "hero",
-                                  child: Icon(
-                                    Icons.access_alarm,
-                                    color: Colors.blueAccent,
-                                    size: 32,
-                                  ))),
-                        ),
-                      ),
+                      child: Center(
+                          child: Hero(
+                              tag: "hero",
+                              child: Icon(
+                                Icons.access_alarm,
+                                color: Colors.blueAccent,
+                                size: 32,
+                              ))),
                     ),
                   ),
                 ])
@@ -248,7 +222,6 @@ class _StartPageState extends State<StartPage> {
                     ),
                   )),
             ])),
-
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

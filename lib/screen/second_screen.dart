@@ -43,23 +43,24 @@ class _SecondPageState extends State<SecondPage> {
         currentIndex: 0,
         items: [
           BottomNavigationBarItem(
+
             icon: Icon(
               Icons.arrow_back,
-              color: mainColor,
+              //color: mainColor,
             ),
             title: Text(
               'Back',
-              style: TextStyle(color: mainColor),
+              //style: TextStyle(color: mainColor),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.arrow_forward,
-              color: mainColor,
+              //color: mainColor,
             ),
             title: Text(
               'Forward',
-              style: TextStyle(color: mainColor),
+              //style: TextStyle(color: mainColor),
             ),
           )
         ],

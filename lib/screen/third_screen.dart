@@ -60,6 +60,7 @@ class _ThirdPageState extends State {
               rows: [
                 DataRow(selected: true, cells: [
                   DataCell(
+
                     Text(
                       '2',
                       style: MyTextStyle2,
@@ -213,7 +214,7 @@ class _ThirdPageState extends State {
             ),
             ColorFiltered(
               child: Image.asset('images/sun.png'),
-              colorFilter: ColorFilter.mode(Colors.blue, BlendMode.modulate),
+              colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn),
             ),
             Center(
               child: TweenAnimationBuilder<Color>(
