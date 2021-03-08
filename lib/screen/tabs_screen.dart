@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_widget_test_210301/const.dart';
+
 class TabsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    int _selectedItemIndex = 0;
-
     List<Widget> items = [
       ListTile(
         leading: Icon(Icons.local_activity, size: 50),
@@ -76,47 +75,47 @@ class TabsPage extends StatelessWidget {
             title: Text('DTC TEST'),
             bottom: TabBar(
               tabs: <Widget>[
-                Text('01', ),
+                Text(
+                  '01',
+                ),
                 Icon(Icons.offline_pin),
-                Text('03', style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.yellow
-                ),),
+                Text(
+                  '03',
+                  style: TextStyle(fontSize: 18, color: Colors.yellow),
+                ),
               ],
             ),
           ),
           body: TabBarView(
             children: <Widget>[
               Center(
-                child:Image.asset('images/sun.png'),
+                child: Image.asset('images/sun.png'),
               ),
               Center(
-                child:
-                Center(
-                  //https://www.woolha.com/tutorials/flutter-using-listwheelscrollview-widget-examples
-                    child: ListWheelScrollView(
-                      itemExtent: 75,
-                      children: items,
-                      magnification: 1.5,
-                      useMagnifier: true,
-                      physics: FixedExtentScrollPhysics(),
-                      diameterRatio: 1.5,
-                      squeeze: 0.8,
-                      onSelectedItemChanged: (index) => {
-
-                      },
-                    )
-                )
-              ),Center(
-                child: Text('Bla', style: MyTextStyle,),
+                  child: Center(
+                      //https://www.woolha.com/tutorials/flutter-using-listwheelscrollview-widget-examples
+                      child: ListWheelScrollView(
+                itemExtent: 75,
+                children: items,
+                magnification: 1.5,
+                useMagnifier: true,
+                physics: FixedExtentScrollPhysics(),
+                diameterRatio: 1.5,
+                squeeze: 0.8,
+                onSelectedItemChanged: (index) => {},
+              ))),
+              Center(
+                child: Text(
+                  'Bla',
+                  style: MyTextStyle,
+                ),
               )
             ],
-          )
-      ),
+          )),
     );
   }
 
-  Padding myLisView(){
+  void myLisView() {
     Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -125,13 +124,11 @@ class TabsPage extends StatelessWidget {
             leading: Icon(Icons.account_balance),
             title: SelectableText(
               'MADÁR az ász',
-              toolbarOptions:
-              ToolbarOptions(copy: true, selectAll: true),
+              toolbarOptions: ToolbarOptions(copy: true, selectAll: true),
             ),
             trailing: Icon(Icons.style),
             subtitle: Text("Tovább a második oldalra"),
-            onTap: () {
-            },
+            onTap: () {},
           )),
     );
   }

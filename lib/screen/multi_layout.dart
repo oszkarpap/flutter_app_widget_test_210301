@@ -1,8 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_widget_test_210301/button.dart';
-import 'package:flutter_app_widget_test_210301/screen/page_view.dart';
-import 'package:flutter_app_widget_test_210301/main.dart';
 
 class MultiLayout extends StatefulWidget {
   @override

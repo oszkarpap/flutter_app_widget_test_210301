@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 
-
 class ListViewScreen extends StatefulWidget {
   @override
   _ListViewScreenState createState() => _ListViewScreenState();
 }
 
 class _ListViewScreenState extends State<ListViewScreen> {
-  final itemsList = List<String>.generate(10, (n) => "List item ${n}");
+  final itemsList = List<String>.generate(10, (n) => "List item $n");
 
   ListView generateItemsList() {
     return ListView.builder(
       itemCount: itemsList.length,
-
       itemBuilder: (context, index) {
-
         return Dismissible(
           key: Key(itemsList[index]),
           child: InkWell(
@@ -26,14 +23,14 @@ class _ListViewScreenState extends State<ListViewScreen> {
           secondaryBackground: slideLeftBackground(),
           confirmDismiss: (direction) async {
             if (direction == DismissDirection.endToStart) {
-             return await showDialog(
+              return await showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
                       content: Text(
                           "Are you sure you want to delete ${itemsList[index]}?"),
                       actions: <Widget>[
-                        FlatButton(
+                        RawMaterialButton(
                           child: Text(
                             "Cancel",
                             style: TextStyle(color: Colors.black),
@@ -42,13 +39,13 @@ class _ListViewScreenState extends State<ListViewScreen> {
                             Navigator.of(context).pop();
                           },
                         ),
-                        FlatButton(
+                        RawMaterialButton(
                           child: Text(
                             "Delete",
                             style: TextStyle(color: Colors.red),
                           ),
                           onPressed: () {
-                            // TODO: Delete the item from DB etc..
+                            Navigator.of(context).pop();
                             setState(() {
                               itemsList.removeAt(index);
                             });
@@ -58,7 +55,6 @@ class _ListViewScreenState extends State<ListViewScreen> {
                       ],
                     );
                   });
-
             } else {
               return false;
             }

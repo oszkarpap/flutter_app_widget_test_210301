@@ -9,7 +9,6 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
-  @override
   static const double secondPageEdgeInsets = 32.0;
   static const double secondPageIconSize = 32.0;
   static const Color mainColor = Colors.green;
@@ -34,6 +33,7 @@ class _SecondPageState extends State<SecondPage> {
   int _indexedNumber = 0;
   double _opacity = 1;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -43,21 +43,24 @@ class _SecondPageState extends State<SecondPage> {
         currentIndex: 0,
         items: [
           BottomNavigationBarItem(
-
+            tooltip: 'BACK',
             icon: Icon(
               Icons.arrow_back,
               //color: mainColor,
             ),
+            // ignore: deprecated_member_use
             title: Text(
               'Back',
               //style: TextStyle(color: mainColor),
             ),
           ),
           BottomNavigationBarItem(
+            tooltip: 'FORWARD',
             icon: Icon(
               Icons.arrow_forward,
               //color: mainColor,
             ),
+            // ignore: deprecated_member_use
             title: Text(
               'Forward',
               //style: TextStyle(color: mainColor),
@@ -344,8 +347,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  Container MyContainer(Color color, Color borderColor) {
-    decoration:
+  void myContainer(Color color, Color borderColor) {
     BoxDecoration(
       color: color,
       border: Border.all(

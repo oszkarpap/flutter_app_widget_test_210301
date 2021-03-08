@@ -3,7 +3,12 @@ import 'package:flutter_app_widget_test_210301/screen/start_screen.dart';
 
 void main() => runApp(FlutterAppWidgetTest());
 
-class FlutterAppWidgetTest extends StatelessWidget {
+class FlutterAppWidgetTest extends StatefulWidget {
+  @override
+  _FlutterAppWidgetTestState createState() => _FlutterAppWidgetTestState();
+}
+
+class _FlutterAppWidgetTestState extends State<FlutterAppWidgetTest> {
   int num;
 
   @override
@@ -12,10 +17,9 @@ class FlutterAppWidgetTest extends StatelessWidget {
     num == 8 ? num = 9 : num = 7;
     return MaterialApp(
       theme: ThemeData.light().copyWith(
-
         primaryColor: Colors.blueAccent,
         scaffoldBackgroundColor: Colors.grey[300],
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.white,
           selectedIconTheme: IconThemeData(
             color: Colors.green,
@@ -35,11 +39,9 @@ class FlutterAppWidgetTest extends StatelessWidget {
             color: Colors.lightGreen,
             fontSize: 12,
           ),
-        ),),
+        ),
+      ),
       home: StartPage(),
     );
   }
 }
-
-
-

@@ -3,7 +3,6 @@ import 'package:flutter_app_widget_test_210301/screen/sliver.dart';
 import 'package:flutter_app_widget_test_210301/screen/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_widget_test_210301/button.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_app_widget_test_210301/screen/second_screen.dart';
 import 'package:flutter_app_widget_test_210301/screen/multi_layout.dart';
 import 'package:flutter_app_widget_test_210301/screen/listview_screen.dart';
@@ -15,7 +14,6 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-  static const double columnPaddingEdgeInsets = 16.0;
   static const double mySizedBoxSize = 64.0;
   Random random = new Random();
   int incrementer = 1;
@@ -79,8 +77,7 @@ class _StartPageState extends State<StartPage> {
                   child: MyButton(
                     buttonName: "Expand 02 + SB",
                     onPressed: () {
-                      scaffoldKey.currentState
-                          .showSnackBar(SnackBar(content: Text("HELLÓ!")));
+                      mySnackBar(text: 'Helló!');
                     },
                     buttonColor: Colors.lightBlueAccent,
                   ),
@@ -112,7 +109,7 @@ class _StartPageState extends State<StartPage> {
                 MyButton(
                   buttonName: "Flex + 2.oldal",
                   onPressed: () {
-                    MyNav();
+                    myNav();
                   },
                   buttonColor: Colors.orangeAccent,
                 ),
@@ -123,7 +120,7 @@ class _StartPageState extends State<StartPage> {
                     child: MyButton(
                       buttonName: "Flx+Ignrd",
                       onPressed: () {
-                        MyNav();
+                        myNav();
                       },
                       buttonColor: Colors.red,
                     ),
@@ -140,31 +137,29 @@ class _StartPageState extends State<StartPage> {
                 MyButton(
                   buttonName: "SliverPage",
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SliverPage()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SliverPage()));
                   },
                   buttonColor: Colors.brown,
                 ),
                 MyButton(
                   buttonName: "Wrap_02",
                   onPressed: () {
-                    MyNav();
+                    myNav();
                   },
                   buttonColor: Colors.green,
                 ),
                 MyButton(
                   buttonName: "Wrap_03",
                   onPressed: () {
-                    MyNav();
+                    myNav();
                   },
                   buttonColor: Colors.lightGreenAccent,
                 ),
                 MyButton(
                   buttonName: "Wrap_04",
                   onPressed: () {
-                    MyNav();
+                    myNav();
                   },
                   buttonColor: Colors.deepPurple,
                 ),
@@ -185,7 +180,7 @@ class _StartPageState extends State<StartPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      MyNav();
+                      myNav();
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -281,11 +276,9 @@ class _StartPageState extends State<StartPage> {
                           },
                           onAccept: (data) {
                             if (data % 7 == 0) {
-                              scaffoldKey.currentState
-                                  .showSnackBar(SnackBar(content: Text("OK!")));
+                              mySnackBar(text: 'Helyes!');
                             } else {
-                              scaffoldKey.currentState.showSnackBar(
-                                  SnackBar(content: Text("NEM!")));
+                              mySnackBar(text: 'Helytelen!');
                             }
                           },
                         ),
@@ -309,11 +302,9 @@ class _StartPageState extends State<StartPage> {
                           },
                           onAccept: (data) {
                             if (data % 7 != 0) {
-                              scaffoldKey.currentState
-                                  .showSnackBar(SnackBar(content: Text("OK!")));
+                              mySnackBar(text: 'Helyes!');
                             } else {
-                              scaffoldKey.currentState.showSnackBar(
-                                  SnackBar(content: Text("NEM!")));
+                              mySnackBar(text: 'Helytelen!');
                             }
                           },
                         ),
@@ -369,7 +360,17 @@ class _StartPageState extends State<StartPage> {
     );
   }
 
-  void MyNav() {
+  void mySnackBar({String text}) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(text),
+      action: SnackBarAction(
+        label: 'OK',
+        onPressed: () {},
+      ),
+    ));
+  }
+
+  void myNav() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SecondPage()),

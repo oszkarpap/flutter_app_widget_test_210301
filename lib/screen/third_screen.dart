@@ -1,11 +1,9 @@
-import 'dart:io';
-
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_widget_test_210301/button.dart';
 import 'package:flutter_app_widget_test_210301/const.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+
 import 'package:geolocator/geolocator.dart';
 
 class ThirdPage extends StatefulWidget {
